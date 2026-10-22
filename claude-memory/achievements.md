@@ -1,6 +1,6 @@
 # 进度记录（achievements）
 
-分支：`dev`（`main` 上只有文档的初始提交）。测试命令：`"E:/MiniConda/envs/biomotum/python.exe" -m pytest tests -q`，JS：`node --test tests/web/`。
+分支：`dev`（`main` 上只有文档的初始提交）。测试命令：`"E:/MiniConda/envs/biomotum/python.exe" -m pytest tests -q`，JS：`node --test "tests/web/*.test.js"`。
 
 ## 子项目 1：骨架与核心容器
 
@@ -85,3 +85,9 @@
   6. 聊天；
   7. 底部输入框。
 - 电脑宽屏：画布在左边，玩家和聊天在右边一栏。
+
+### Task 11：前端纯逻辑 ✅
+- 新增：`web/js/lib/storage.js`（不会抛异常的 localStorage）、`web/js/state/reducers.js`（房间页状态）、`web/js/modes/index.js`（前端模式注册表）、`web/js/modes/classic/reducer.js`、`web/js/modes/classic/format.js`；测试 `tests/web/storage.test.js`、`reducers.test.js`、`classic.test.js`。
+- 收到 welcome 之前的消息一律忽略；倒计时按"本地收到时间 + 剩余毫秒"算出本地截止时间，不受各地时钟误差影响。
+- 测试：JS 21 个（Python 仍是 164 个）。
+- 偏离计划：JS 测试命令改成 `node --test "tests/web/*.test.js"`。Node 24 直接传目录会把目录当成文件来跑。

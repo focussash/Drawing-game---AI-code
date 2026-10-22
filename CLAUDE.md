@@ -22,7 +22,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A browser-based 你画我猜 (Pictionary) game for a group of friends spread across US East, US Central and China. Mobile browsers first. Spec: `claude-memory/DESIGN.md`; plan: `claude-memory/DEVELOPMENT_PLAN.md`; progress: `claude-memory/achievements.md`.
 
-Run JS tests with `node --test tests/web/` (Node built-in runner; no npm packages).
+Run JS tests with `node --test "tests/web/*.test.js"` (Node built-in runner; no npm packages; the bare directory form does not work on Node 24).
 
 ## Environment
 
@@ -60,4 +60,4 @@ All commands MUST use the full venv Python path:
 - `words/*.txt` — word banks, one word per line (UTF-8 or GBK).
 - `server/` — Python backend. Game rules are pure logic (no network, injected clock); `server/modes/<name>/` holds each game mode; `server/net/` is the FastAPI/WebSocket layer.
 - `web/` — zero-build frontend (HTML/CSS/ES modules).
-- `tests/server/` (pytest), `tests/web/` (node --test).
+- `tests/server/` (pytest), `tests/web/` (`node --test "tests/web/*.test.js"`).
