@@ -9,7 +9,16 @@
 
 /* In the lobby the page scrolls normally; in a game it is one fixed screen. */
 body.in-game { overflow: hidden; overscroll-behavior: none; }
-body.in-game .app { height: 100vh; height: 100dvh; }
+/* Pinned to the visible area, which shrinks when the phone keyboard opens (see viewport.js). */
+body.in-game .app {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: var(--app-top, 0px);
+  height: 100vh;
+  height: var(--app-height, 100dvh);
+}
+body.in-game .hint { display: none; }
 
 /* ---- banner, toast, full screens ------------------------------------- */
 
@@ -226,7 +235,7 @@ body.in-game .chat-log { flex: 1; min-height: 0; }
 
 .stage { display: flex; justify-content: center; }
 /* Leave room for the bars and the chat; never wider than the screen. */
-.canvas { width: min(100%, calc((100dvh - 280px) * 4 / 3)); min-width: 240px; background: #fff; }
+.canvas { width: min(100%, calc((var(--app-height, 100dvh) - 280px) * 4 / 3)); min-width: 200px; background: #fff; }
 
 /* Two rows on phones: colors, then sizes + eraser + clear. */
 .tools { flex-wrap: wrap; gap: 6px 12px; overflow: visible; }

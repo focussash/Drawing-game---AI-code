@@ -8,9 +8,11 @@ import { GameSocket, socketUrl } from "./net/socket.js";
 import { createStore } from "./state/store.js";
 import { mountChat } from "./ui/chat.js";
 import { mountLobby } from "./ui/lobby.js";
+import { mountWeChatHint } from "./ui/banner.js";
 import { askNickname } from "./ui/nickname.js";
 import { mountStatus, showClosed } from "./ui/status.js";
 import { showToast } from "./ui/toast.js";
+import { trackVisualViewport } from "./ui/viewport.js";
 
 const $ = (id) => document.getElementById(id);
 const DEFAULT_NICKNAME_LENGTH = 12;
@@ -107,6 +109,8 @@ function boot() {
     return;
   }
   document.title = `你画我猜 ${code}`;
+  mountWeChatHint($("hint"));
+  trackVisualViewport();
   mountStatus($("banner"), screen, store, { rejectedText: () => lastError });
   mountLobby($("lobby"), store, socket);
   shell.chat = mountChat($("chat-log"), $("chat-form"), $("chat-input"), store, socket);

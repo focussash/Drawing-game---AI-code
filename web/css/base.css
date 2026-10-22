@@ -17,7 +17,7 @@
 
 * { box-sizing: border-box; }
 
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; touch-action: manipulation; /* no double-tap zoom */ }
 
 body {
   margin: 0;
@@ -68,6 +68,16 @@ button, input { font: inherit; color: inherit; }
   border: 1px solid var(--grid-strong);
   border-radius: 3px;
   vertical-align: 1px;
+}
+
+.hint {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 16px;
+  font-size: 14px;
+  background: var(--marker);
 }
 
 [hidden] { display: none !important; }

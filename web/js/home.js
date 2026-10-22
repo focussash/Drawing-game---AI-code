@@ -1,5 +1,9 @@
 // Home page: create a room, or jump to one by its code.
 
+import { mountWeChatHint } from "./ui/banner.js";
+
+mountWeChatHint(document.getElementById("hint"));
+
 const CODE_RE = /^[A-Z0-9]{4}$/;
 const error = document.getElementById("error");
 
