@@ -89,7 +89,7 @@ sudo systemctl status nhwc        # 看到 active (running) 就好了
 
 然后朋友打开 `http://VPS的IP:8000`。
 
-想要正式的域名和 https（微信里更不容易被拦截）：买个域名指向 VPS，再装 [Caddy](https://caddyserver.com)。在它的配置里写 `你的域名 { reverse_proxy localhost:8000 }`，它会自动申请证书。页面会自动改用 `wss://`，不用改代码。
+想要正式的域名和 https（微信里更不容易被拦截）：买个域名指向 VPS，再装 [Caddy](https://caddyserver.com)。在它的配置里写 `你的域名 { reverse_proxy 127.0.0.1:8000 }`，它会自动申请证书。页面会自动改用 `wss://`，不用改代码。
 
 ## 三、改配置
 

@@ -10,7 +10,7 @@ echo.
 echo 正在申请公网地址。下面出现的 https://....lhr.life 就是发给朋友的网址（每次都不一样）。
 echo 注意：拿到网址的任何人都能进来玩；关掉这个窗口就断开。
 echo.
-ssh -o StrictHostKeyChecking=accept-new -o ServerAliveInterval=30 -R 80:localhost:8000 nokey@localhost.run
+ssh -o StrictHostKeyChecking=accept-new -o ServerAliveInterval=30 -R 80:127.0.0.1:8000 nokey@localhost.run
 echo.
 echo 公网地址已断开。服务器窗口要单独关掉。
 pause
