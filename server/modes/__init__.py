@@ -6,8 +6,9 @@ from typing import Any
 
 from server.config import ConfigError
 from server.modes.base import Mode
+from server.modes.classic.mode import ClassicMode
 
-MODES: dict[str, type[Mode]] = {}
+MODES: dict[str, type[Mode]] = {ClassicMode.name: ClassicMode}
 
 
 def parse_mode_configs(raw: dict[str, dict]) -> dict[str, Any]:

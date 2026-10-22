@@ -33,3 +33,9 @@
 - 新增：`server/modes/classic/scoring.py`、`turn_timer.py`、`hints.py`、`judge.py`、`rotation.py`，测试 `tests/server/test_classic_units.py`。
 - 计分：猜对得 `round(max(20, 100 × 剩余/总时长) × 0.75^揭字数)`，画手每有一人猜对得 `round(25 × 0.75^揭字数)`（参数都来自配置）。
 - 测试：18 个。累计 78 个。
+
+### Task 6：经典模式状态机 ✅
+- 新增：`server/modes/classic/mode.py`（ClassicMode），测试辅助 `tests/server/helpers.py`（FakeContext、make_game），测试 `tests/server/test_classic_mode.py`；`server/modes/__init__.py` 注册了 classic。
+- 覆盖的场景：选词（手动/超时自动）、猜对（打码、加分、只有知情者能看到后续发言）、猜错公开、首个猜对后缩短倒计时、全员猜对提前结束、时间到、揭字打折、揭字上限、加时上限、房主跳过、画手掉线 15 秒跳过、掉线的人轮到时跳过、短暂掉线不结束整局、打满圈数结束并排名、中途加入、被踢的画手/猜词者、快照不泄露答案、同一局不重复出词。
+- 测试：30 个。累计 108 个。
+- 小补充：揭字时聊天栏会出现一条系统消息"画手揭示了一个字"；加时会出现"画手加时 10 秒"。
