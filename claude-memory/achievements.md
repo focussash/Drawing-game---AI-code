@@ -47,3 +47,12 @@
 - 偏离计划：多拆了一个 `server/room_strokes.py`，让 room.py 不超过 300 行；`welcome` 总是排在给这个人的其他消息前面。
 
 **子项目 2 验证：** `pytest tests` 146/146 通过。测试里完整模拟过的一局：选词 → 作画 → 猜对（打码）→ 揭字打折 → 加时 → 画手掉线跳过 → 打满圈数 → 回到等待界面并显示排名。直接进入子项目 3。
+
+## 子项目 3：网络层
+
+### Task 8：连接、房间驱动、应用 ✅
+- 新增：`server/net/connection.py`（每个连接一个发送队列）、`runner.py`（每个房间一个驱动循环：到截止时间或有新消息就 tick 并发送）、`session.py`（hello 握手 → 收发循环）、`app.py`（create_app：首页、房间页、建房 API、WebSocket、静态文件）；占位页 `web/index.html`、`web/room.html`；`pytest.ini`；测试 `tests/server/test_app.py`。
+- 断线重连竞态（Review Focus 第 1 条）：只有"当前绑定的连接"断开才算掉线。做了变异检查：故意去掉这个保护后，`test_stale_close_does_not_mark_offline` 会失败，恢复后通过。
+- 所有页面都带 `Cache-Control: no-cache`，服务器更新后大家刷新就能拿到新版本。房间码大小写都认。
+- 测试：13 个。累计 159 个。
+- 备注：Starlette 提示其 TestClient 用 httpx 已过时（建议换 httpx2），只影响测试工具，已在 `pytest.ini` 里屏蔽该提示，没有装新包。
