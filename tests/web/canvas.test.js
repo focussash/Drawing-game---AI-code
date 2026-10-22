@@ -68,3 +68,22 @@ test("move without begin does nothing", () => {
   b.flush();
   assert.equal(r.sent.length, 0);
 });
+
+test("batcher can start from a given id so a reloaded drawer never reuses ids", () => {
+  const r = recorder();
+  const b = new StrokeBatcher(r.send, 500);
+  b.begin("brush", "#000000", 8, 0, 0);
+  assert.equal(r.sent[0][1].id, 500);
+});
+
+test("abort drops buffered points without sending them", () => {
+  const r = recorder();
+  const b = new StrokeBatcher(r.send);
+  b.begin("brush", "#000000", 8, 0, 0);
+  b.move(5, 5);
+  b.abort();
+  b.flush();
+  b.move(6, 6);
+  b.flush();
+  assert.deepEqual(r.sent.map(([type]) => type), ["stroke_begin"]);
+});

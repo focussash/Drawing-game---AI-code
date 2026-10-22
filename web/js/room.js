@@ -1,6 +1,7 @@
 // Room page bootstrap: identity, connection, and mounting the UI modules.
 // Mode-specific UI is loaded on demand from modes/index.js.
 
+import { mountBoard } from "./canvas/board.js";
 import { keys, safeGet, safeSet } from "./lib/storage.js";
 import { MODE_REDUCERS, MODE_VIEWS } from "./modes/index.js";
 import { GameSocket, socketUrl } from "./net/socket.js";
@@ -25,6 +26,8 @@ let lastError = "";
 let needNickname = false;
 const messageHooks = []; // extra consumers of raw messages (the canvas)
 const modeViews = {};
+let activeView = null; // what the loaded mode view's mount() returned
+let board = null;
 
 const socket = new GameSocket({
   url: socketUrl(code),
@@ -77,7 +80,10 @@ function applyLayout(state, prev) {
 function loadModeView(mode) {
   if (modeViews[mode] || !MODE_VIEWS[mode]) return;
   modeViews[mode] = MODE_VIEWS[mode]()
-    .then((view) => view.mount(shell))
+    .then((view) => {
+      activeView = view.mount(shell);
+      board.refresh(); // canDraw is known only now
+    })
     .catch((err) => {
       console.error(err);
       delete modeViews[mode];
@@ -104,6 +110,10 @@ function boot() {
   mountStatus($("banner"), screen, store, { rejectedText: () => lastError });
   mountLobby($("lobby"), store, socket);
   shell.chat = mountChat($("chat-log"), $("chat-form"), $("chat-input"), store, socket);
+  board = mountBoard({
+    canvasEl: $("canvas"), toolsEl: $("tools"), store, socket, onMessage: shell.onMessage,
+    canDraw: (state) => state.state === "game" && (activeView?.canDraw(state) ?? false),
+  });
   store.subscribe(applyLayout);
   if (token) socket.connect();
   else promptThenConnect();

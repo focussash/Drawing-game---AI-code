@@ -4,9 +4,9 @@
 export const MAX_POINTS_PER_MESSAGE = 400; // flat [x, y, ...] length; must match the server
 
 export class StrokeBatcher {
-  constructor(send) {
+  constructor(send, firstId = 1) {
     this.send = send;
-    this.nextId = 0;
+    this.nextId = firstId - 1;
     this.current = null;
     this.last = null;
     this.buffer = [];
@@ -36,6 +36,12 @@ export class StrokeBatcher {
 
   end() {
     this.flush();
+    this.current = null;
+  }
+
+  // Drop the stroke in progress without sending more (e.g. the turn just ended).
+  abort() {
+    this.buffer = [];
     this.current = null;
   }
 }
