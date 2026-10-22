@@ -1,0 +1,15 @@
+# systemd 服务文件：在 Linux VPS 上让游戏开机自启、崩了自动重启。
+# 用法见 README 的「方案 C：租一台 VPS」。
+[Unit]
+Description=nhwc (你画我猜) game server
+After=network.target
+
+[Service]
+User=nhwc
+WorkingDirectory=/opt/nhwc
+ExecStart=/opt/nhwc/.venv/bin/python main.py
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

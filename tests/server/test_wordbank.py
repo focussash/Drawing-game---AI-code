@@ -57,3 +57,14 @@ def test_pool_smaller_than_n():
 
 def test_pool_size():
     assert WordPool(["a", "b"], Random(0)).size == 2
+
+
+def test_bundled_default_bank_is_usable():
+    from pathlib import Path
+
+    from server.textnorm import normalize
+
+    words_dir = Path(__file__).resolve().parents[2] / "words"
+    words = load_bank(words_dir, "默认")
+    assert len(words) >= 200
+    assert all(normalize(w) for w in words)

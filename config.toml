@@ -1,42 +1,46 @@
 # 你画我猜 服务器配置。改完后重启服务器生效。
 
 [server]
-host = "0.0.0.0"
-port = 8000
+host = "0.0.0.0"                 # 0.0.0.0 表示同一 Wi-Fi 下的手机也能连；只想本机玩可改成 "127.0.0.1"
+port = 8000                      # 端口；改了的话，start-online.bat 和防火墙规则里的 8000 也要一起改
 
 [room]
-max_players = 12
-min_players = 2
-away_after_seconds = 60          # 掉线超过这么久算"离开"：转移房主、不计入最少人数、等待界面里移除
-drawer_offline_skip_seconds = 15
-empty_room_ttl_seconds = 600
-chat_history = 100
-max_chat_length = 60
-max_nickname_length = 12
+max_players = 12                 # 一个房间最多几个人
+min_players = 2                  # 至少几个人在线才能开始，人数不够时游戏自动结束
+away_after_seconds = 60          # 掉线超过这么久算"离开"：房主身份转交、不计入人数、等待界面里移除
+drawer_offline_skip_seconds = 15 # 画手掉线超过这么久，跳过这一轮
+empty_room_ttl_seconds = 600     # 没人在线的房间多久后自动关闭
+chat_history = 100               # 每个房间保留多少条聊天记录（新进来的人能看到）
+max_chat_length = 60             # 每条消息最多多少字
+max_nickname_length = 12         # 昵称最多多少字
 
 [words]
-dir = "words"                    # 相对于本文件所在目录
+dir = "words"                    # 词库文件夹，相对于本文件所在目录
 
 [drawing]
+# 调色板，#rrggbb 格式。画布底色是白色，橡皮就是白色画笔。
 colors = ["#000000", "#e53935", "#fb8c00", "#fdd835", "#43a047", "#1e88e5", "#795548"]
-brush_sizes = [4, 8, 16, 32]
-eraser_sizes = [16, 32, 64]
+brush_sizes = [4, 8, 16, 32]     # 画笔粗细档位（画布逻辑宽度是 1600）
+eraser_sizes = [16, 32, 64]      # 橡皮粗细档位
 
+# 经典模式：每局的默认设置。房主可以在等待界面里改，只对那个房间生效。
 [modes.classic]
-default_banks = ["默认"]
-rounds = 3
-draw_seconds = 80
-choose_seconds = 15
-word_choices = 3
-show_length_hint = true
-shorten_after_first_correct = true
-shorten_to_seconds = 20
-extend_seconds = 10
-max_extends_per_turn = 3
-reveal_seconds = 6
+default_banks = ["默认"]          # 默认勾选的词库（words 文件夹里的文件名，不带 .txt）
+rounds = 3                       # 圈数：每人画一次算一圈（1..10）
+draw_seconds = 80                # 每轮作画时长，秒（30..300）
+choose_seconds = 15              # 选词时长，秒，超时自动选（5..60）
+word_choices = 3                 # 每轮给画手几个候选词（1..5）
+show_length_hint = true          # 是否提示字数
+shorten_after_first_correct = true # 第一个人猜对后是否缩短倒计时
+shorten_to_seconds = 20          # 缩短到剩多少秒（5..60）
+extend_seconds = 10              # 画手每次加时多少秒（5..60）
+max_extends_per_turn = 3         # 每轮最多加时几次（0..10，0 表示不允许加时）
+reveal_seconds = 6               # 每轮结束后公布答案停留几秒（3..20）
 
+# 计分：猜对得分 = max(guesser_min, guesser_max × 剩余时间 / 作画时长) × reveal_factor^已揭字数
+#       画手每有一人猜对得 drawer_per_guess × reveal_factor^已揭字数
 [modes.classic.scoring]
 guesser_max = 100
 guesser_min = 20
 drawer_per_guess = 25
-reveal_factor = 0.75
+reveal_factor = 0.75             # 画手每揭示一个字，之后的得分乘以这个数（0 < 值 ≤ 1）

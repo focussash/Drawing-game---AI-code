@@ -163,3 +163,9 @@
 - 浏览器验证：手机尺寸下页面正常；可见高度能正确读到；非微信环境下不显示提示；没有报错。iOS 键盘、刘海屏、微信内置浏览器需要真机试。
 - 偏离计划：工具栏的颜色和粗细按钮是 32–34px，没到 44px（到 44px 的话工具栏要占三行），每个按钮之间留了 6px 间距弥补。
 - 测试：JS 45 个，Python 164 个。
+
+### Task 17：默认词库、README、启动脚本 ✅
+- 新增：`README.md`（中文：家里怎么玩、外地朋友怎么连（三种方案）、改配置、加词库、常见问题、开发说明）、`start-server.bat`（双击启动）、`start-online.bat`（双击启动 + localhost.run 临时公网地址）、`deploy/nhwc.service`（VPS 上的 systemd 服务）；`config.toml` 每一项都补了中文注释；`tests/server/test_wordbank.py` 加了"自带词库至少 200 词且都有效"的测试。
+- 公网隧道没有实测：我尝试用 ssh 连 localhost.run 测试，被 Claude Code 自动模式的安全规则拦下（"对外开放入口"需要用户本人决定）。所以 `start-online.bat` 留给用户自己决定是否运行；README 里写明了它未经实测。
+- 踩坑：用 bash 的 printf 写 bat 文件时，路径里的 `\e`、`\b` 被当成转义字符，已改用 Python 原样写入，并检查过。
+- 测试：Python 165 个，JS 45 个。
