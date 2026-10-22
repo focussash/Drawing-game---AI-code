@@ -21,3 +21,10 @@
 - 偏离计划：`CanvasLog.begin` 返回 bool（画布点数超上限时返回 False），这样房间可以不转发被丢弃的笔画。
 
 **子项目 1 验证：** `pytest tests` 43/43 通过。按用户指示直接进入子项目 2。
+
+## 子项目 2：经典模式与房间
+
+### Task 4：模式框架与经典模式设置项 ✅
+- 新增：`server/modes/__init__.py`（MODES 注册表、parse_mode_configs）、`server/modes/base.py`（SettingSpec、validate_settings、ModeContext、Mode 基类）、`server/modes/classic/settings.py`（ClassicConfig、ScoringConfig、设置项表）、`tests/server/test_settings.py`。
+- 等待界面的设置项用一张表定义（key、中文标签、类型、范围），前端以后按这张表自动生成表单，新模式只要提供自己的表。
+- 测试：17 个。累计 60 个。
