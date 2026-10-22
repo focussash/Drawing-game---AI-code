@@ -20,6 +20,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
+A browser-based 你画我猜 (Pictionary) game for a group of friends spread across US East, US Central and China. Mobile browsers first. Spec: `claude-memory/DESIGN.md`; plan: `claude-memory/DEVELOPMENT_PLAN.md`; progress: `claude-memory/achievements.md`.
+
+Run JS tests with `node --test tests/web/` (Node built-in runner; no npm packages).
 
 ## Environment
 
@@ -42,7 +45,7 @@ All commands MUST use the full venv Python path:
 "E:\MiniConda\envs\biomotum\python.exe" -m pytest tests/ -v
 ```
 
-**Current dependencies**: 
+**Current dependencies**: fastapi, uvicorn[standard] (runtime); pytest, httpx (tests). See `requirements.txt`.
 
 ## Permissions
 
@@ -52,3 +55,9 @@ All commands MUST use the full venv Python path:
 ## Architecture
 
 ### Current Structure
+
+- `config.toml` — all tunables (server, room, drawing, per-mode defaults). Loaded by `server/config.py`.
+- `words/*.txt` — word banks, one word per line (UTF-8 or GBK).
+- `server/` — Python backend. Game rules are pure logic (no network, injected clock); `server/modes/<name>/` holds each game mode; `server/net/` is the FastAPI/WebSocket layer.
+- `web/` — zero-build frontend (HTML/CSS/ES modules).
+- `tests/server/` (pytest), `tests/web/` (node --test).
