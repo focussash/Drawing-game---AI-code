@@ -19,7 +19,8 @@ export function reduceClassic(game, msg, now) {
     case "snapshot":
       return withDeadline({ ...emptyGame(), ...msg.game }, msg.game.remaining_ms, now);
     case "phase": {
-      let next = { ...g, phase: msg.phase, round: msg.round, rounds: msg.rounds, drawer: msg.drawer, template: msg.template };
+      let next = { ...g, phase: msg.phase, round: msg.round, rounds: msg.rounds, drawer: msg.drawer, template: msg.template,
+                   extends_left: msg.extends_left ?? g.extends_left };
       if (msg.phase === "choosing") {
         next = { ...next, choices: null, word: null, turn_result: null, correct: [] };
       }

@@ -276,6 +276,7 @@ class ClassicMode(Mode):
         self.ctx.send(Audience.everyone(), {
             "type": "phase", "phase": self.phase, "round": self.rotation.round, "rounds": self.rotation.rounds,
             "drawer": self.drawer, "remaining_ms": self._remaining_ms(now), "template": self._template(),
+            "extends_left": self._extends_left(),
         })
 
     def _send_timer(self, now: float) -> None:

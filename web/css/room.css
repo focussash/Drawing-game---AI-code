@@ -228,11 +228,14 @@ body.in-game .chat-log { flex: 1; min-height: 0; }
 /* Leave room for the bars and the chat; never wider than the screen. */
 .canvas { width: min(100%, calc((100dvh - 280px) * 4 / 3)); min-width: 240px; background: #fff; }
 
-.tools { gap: 8px; }
+/* Two rows on phones: colors, then sizes + eraser + clear. */
+.tools { flex-wrap: wrap; gap: 6px 12px; overflow: visible; }
+.swatches, .tool-group { display: flex; align-items: center; gap: 6px; }
+.tools .sizes { padding-left: 0; border-left: 0; }
 .swatch {
   flex: none;
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border: 2px solid #fff;
   border-radius: 50%;
   box-shadow: 0 0 0 1px var(--line);

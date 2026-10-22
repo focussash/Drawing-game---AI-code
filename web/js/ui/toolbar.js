@@ -26,20 +26,23 @@ export function mountToolbar(el, drawing, onClear) {
     const current = erasing ? state.eraserSize : state.brushSize;
     const biggest = Math.max(...sizes);
     el.replaceChildren(
-      ...drawing.colors.map((c) =>
+      h("span", { class: "swatches" }, drawing.colors.map((c) =>
         h("button", {
           class: "swatch", style: `background:${c}`, "aria-label": COLOR_NAMES[c] ?? c,
           "aria-pressed": String(!erasing && state.color === c),
           onclick: () => update({ tool: "brush", color: c }),
-        })),
-      h("span", { class: "sizes" },
-        sizes.map((s, i) =>
-          h("button", {
-            class: "size", "aria-label": `${SIZE_NAMES[i] ?? s}`, "aria-pressed": String(current === s),
-            onclick: () => update(erasing ? { eraserSize: s } : { brushSize: s }),
-          }, h("i", { style: `width:${dotPx(s, biggest)}px;height:${dotPx(s, biggest)}px` })))),
-      h("button", { class: "tool-btn", "aria-pressed": String(erasing), onclick: () => update({ tool: erasing ? "brush" : "eraser" }) }, "橡皮"),
-      h("button", { class: "tool-btn", onclick: () => confirm("清空画布？") && onClear() }, "清空"),
+        }))),
+      h("span", { class: "tool-group" },
+        h("span", { class: "sizes" },
+          sizes.map((s, i) =>
+            h("button", {
+              class: "size", "aria-label": `${SIZE_NAMES[i] ?? s}`, "aria-pressed": String(current === s),
+              onclick: () => update(erasing ? { eraserSize: s } : { brushSize: s }),
+            }, h("i", { style: `width:${dotPx(s, biggest)}px;height:${dotPx(s, biggest)}px` })))),
+        h("button", { class: "tool-btn", "aria-pressed": String(erasing),
+                      onclick: () => update({ tool: erasing ? "brush" : "eraser" }) }, "橡皮"),
+        h("button", { class: "tool-btn", onclick: () => confirm("清空画布？") && onClear() }, "清空"),
+      ),
     );
   }
 

@@ -55,3 +55,8 @@ test("reasonText", () => {
   assert.equal(reasonText("skipped"), "已跳过");
   assert.equal(reasonText("drawer_left"), "画手离开了");
 });
+
+test("phase carries extends_left", () => {
+  const g = reduceClassic(null, { type: "phase", phase: "drawing", round: 1, rounds: 3, drawer: "p1", remaining_ms: 80000, template: null, extends_left: 3 }, 0);
+  assert.equal(g.extends_left, 3);
+});

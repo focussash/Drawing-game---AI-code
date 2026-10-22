@@ -30,6 +30,7 @@ def test_choose_starts_drawing():
     choose(mode, ctx, clock)
     ph = last(ctx, "phase")
     assert ph["phase"] == "drawing" and ph["remaining_ms"] == 80000 and ph["template"] == ["_", "_", "_"]
+    assert ph["extends_left"] == 3
     assert last(ctx, "word", "p1")["word"] == "长颈鹿"
     assert last(ctx, "word", "p2") is None
 

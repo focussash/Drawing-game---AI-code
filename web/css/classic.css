@@ -1,0 +1,64 @@
+/* Classic mode: 田字格 hint, countdown, word choices, turn results, scoreboard. */
+
+.round { font-size: 13px; color: var(--ink-soft); white-space: nowrap; }
+
+.timer {
+  min-width: 2ch;
+  text-align: right;
+  font: 600 26px/1 var(--sans);
+  font-variant-numeric: tabular-nums;
+}
+.timer.urgent { color: var(--red-pen); }
+
+/* The hint: one 田字格 box per character. */
+.tian { display: flex; justify-content: center; align-items: center; gap: 4px; min-width: 0; }
+.tian .cell {
+  position: relative;
+  flex: none;
+  width: min(40px, 10vw);
+  height: min(40px, 10vw);
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1.5px solid var(--grid-strong);
+  border-radius: 0;
+  background: #fff;
+  color: var(--ink);
+  font: min(28px, 7vw) / 1 var(--kai);
+}
+.tian .cell::before,
+.tian .cell::after {
+  content: "";
+  position: absolute;
+  border-color: var(--grid-strong);
+  opacity: 0.45;
+  pointer-events: none;
+}
+.tian .cell::before { left: 50%; top: 0; bottom: 0; border-left: 1px dashed; }
+.tian .cell::after { top: 50%; left: 0; right: 0; border-top: 1px dashed; }
+.tian .cell.revealed { color: var(--red-pen); }
+.tian .cell.tappable { cursor: pointer; }
+.tian .cell.tappable:hover, .tian .cell.tappable:focus-visible { background: #fffbe0; outline: none; }
+.tian .gap { width: 12px; }
+.hint-text { font: 18px/1.2 var(--kai); color: var(--ink-soft); }
+
+/* Overlay cards on top of the canvas. */
+.pick, .result { text-align: center; display: flex; flex-direction: column; gap: 12px; align-items: center; }
+.pick p, .result p, .waiting { margin: 0; }
+.waiting { font: 20px/1.4 var(--kai); }
+.pick-words { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.pick-word { font: 22px/1.2 var(--kai); min-width: 96px; }
+.answer { font: 20px/1.4 var(--kai); }
+.answer strong { display: block; font-size: 40px; font-weight: 400; color: var(--red-pen); }
+.deltas { list-style: none; margin: 0; padding: 0; min-width: 160px; }
+.deltas li { display: flex; justify-content: space-between; gap: 16px; }
+.deltas .plus { color: var(--red-pen); font-variant-numeric: tabular-nums; }
+
+/* Scoreboard strip. */
+.scoreboard .pl { flex: none; min-width: 48px; text-align: center; font-size: 12px; line-height: 1.3; }
+.scoreboard .pl b { display: block; font: 600 15px/1.3 var(--sans); }
+.scoreboard .pl.drawer b::after { content: " ✎"; color: var(--grid-strong); }
+.scoreboard .pl.got b { color: var(--red-pen); }
+.scoreboard .pl.got b::after { content: " ✓"; }
+.scoreboard .pl.offline { opacity: 0.4; }
+.scoreboard .pl.you { text-decoration: underline var(--marker) 3px; text-underline-offset: 4px; }
