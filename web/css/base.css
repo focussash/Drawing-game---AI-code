@@ -1,0 +1,77 @@
+/* 作业本 theme: grid paper, blue-black ink, a teacher's red pen. System fonts only. */
+
+:root {
+  --paper: #f6faf7;
+  --grid: #cfe3d8;
+  --grid-strong: #6fae93;
+  --ink: #1f2a44;
+  --ink-soft: #5b6680;
+  --red-pen: #d6342c;
+  --marker: #ffe066;
+  --line: #dde6e1;
+  --card: rgba(255, 255, 255, 0.88);
+  --kai: "Kaiti SC", "STKaiti", "KaiTi", "楷体", "Noto Serif CJK SC", "Songti SC", serif;
+  --sans: -apple-system, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", system-ui, sans-serif;
+  --tap: 44px;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font: 15px/1.5 var(--sans);
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+button, input { font: inherit; color: inherit; }
+
+.btn {
+  min-height: var(--tap);
+  padding: 8px 16px;
+  border: 1px solid var(--ink);
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.btn:disabled { opacity: 0.45; cursor: default; }
+.btn.primary { background: var(--ink); color: #fff; }
+.btn.quiet { border-color: var(--line); color: var(--ink-soft); }
+.btn.small { min-height: 32px; padding: 2px 10px; font-size: 13px; }
+.btn:focus-visible, .field:focus-visible, .chip:focus-visible { outline: 3px solid var(--marker); outline-offset: 1px; }
+
+.field {
+  min-height: var(--tap);
+  padding: 8px 10px;
+  border: 1px solid var(--ink-soft);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.kai { font-family: var(--kai); }
+.muted { color: var(--ink-soft); }
+
+.tag {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 0 4px;
+  font-size: 11px;
+  line-height: 16px;
+  color: var(--grid-strong);
+  border: 1px solid var(--grid-strong);
+  border-radius: 3px;
+  vertical-align: 1px;
+}
+
+[hidden] { display: none !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}

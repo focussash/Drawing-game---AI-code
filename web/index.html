@@ -1,2 +1,28 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><title>你画我猜</title></head><body><h1>你画我猜</h1></body></html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>你画我猜</title>
+  <link rel="stylesheet" href="/static/css/base.css">
+  <link rel="stylesheet" href="/static/css/home.css">
+</head>
+<body>
+  <main class="home">
+    <h1 class="home-title kai" aria-label="你画我猜">
+      <span>你</span><span>画</span><span>我</span><span>猜</span>
+    </h1>
+    <button id="create" class="btn primary home-create">创建房间</button>
+    <form id="join" class="home-join">
+      <label for="code" class="muted">朋友发来了房间码？</label>
+      <div class="home-join-row">
+        <input id="code" class="field" maxlength="4" autocomplete="off" autocapitalize="characters"
+               placeholder="例如 K922" inputmode="text">
+        <button class="btn">加入</button>
+      </div>
+    </form>
+    <p id="error" class="home-error" role="alert"></p>
+  </main>
+  <script type="module" src="/static/js/home.js"></script>
+</body>
+</html>

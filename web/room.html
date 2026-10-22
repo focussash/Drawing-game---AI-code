@@ -1,2 +1,41 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><title>你画我猜</title></head><body><h1>你画我猜</h1></body></html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>你画我猜</title>
+  <link rel="stylesheet" href="/static/css/base.css">
+  <link rel="stylesheet" href="/static/css/room.css">
+</head>
+<body class="in-lobby">
+  <div id="banner" class="banner" role="status" hidden></div>
+
+  <div id="app" class="app">
+    <section id="lobby" class="lobby" aria-label="等待界面"></section>
+
+    <section id="game" class="game" aria-label="游戏" hidden>
+      <header id="topbar" class="topbar"></header>
+      <div id="stage" class="stage">
+        <canvas id="canvas" class="canvas"></canvas>
+        <div id="overlay" class="overlay" hidden></div>
+      </div>
+      <div id="tools" class="tools" hidden></div>
+      <div id="actions" class="actions"></div>
+      <div id="scoreboard" class="scoreboard"></div>
+    </section>
+
+    <section id="chat" class="chat" aria-label="聊天">
+      <div id="chat-log" class="chat-log" aria-live="polite"></div>
+      <form id="chat-form" class="chat-form">
+        <input id="chat-input" class="field" autocomplete="off" enterkeyhint="send" placeholder="说点什么">
+        <button class="btn primary">发送</button>
+      </form>
+    </section>
+  </div>
+
+  <div id="screen" class="screen" hidden></div>
+  <div id="toast" class="toast" role="alert" hidden></div>
+
+  <script type="module" src="/static/js/room.js"></script>
+</body>
+</html>

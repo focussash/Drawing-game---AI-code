@@ -1,0 +1,46 @@
+.home {
+  max-width: 360px;
+  margin: 0 auto;
+  padding: 12vh 16px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* The title sits in 田字格 boxes, like the in-game hint. */
+.home-title {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin: 0;
+  font-weight: 400;
+}
+.home-title span {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  font-size: 46px;
+  line-height: 1;
+  background: #fff;
+  border: 2px solid var(--grid-strong);
+}
+.home-title span::before,
+.home-title span::after {
+  content: "";
+  position: absolute;
+  border-color: var(--grid-strong);
+  opacity: 0.45;
+}
+.home-title span::before { left: 50%; top: 0; bottom: 0; border-left: 1px dashed; }
+.home-title span::after { top: 50%; left: 0; right: 0; border-top: 1px dashed; }
+.home-title span:nth-child(2) { color: var(--red-pen); }
+
+.home-create { width: 100%; font-size: 17px; min-height: 52px; }
+
+.home-join { display: flex; flex-direction: column; gap: 6px; }
+.home-join-row { display: flex; gap: 8px; }
+.home-join-row .field { flex: 1; text-transform: uppercase; letter-spacing: 0.15em; }
+
+.home-error { min-height: 1.5em; margin: 0; color: var(--red-pen); }

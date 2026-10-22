@@ -91,3 +91,23 @@
 - 收到 welcome 之前的消息一律忽略；倒计时按"本地收到时间 + 剩余毫秒"算出本地截止时间，不受各地时钟误差影响。
 - 测试：JS 21 个（Python 仍是 164 个）。
 - 偏离计划：JS 测试命令改成 `node --test "tests/web/*.test.js"`。Node 24 直接传目录会把目录当成文件来跑。
+
+### Task 12：首页、连接、等待界面、聊天 ✅
+- 新增/替换：
+  - 页面和样式：`web/index.html`、`web/room.html`、`web/css/base.css`、`web/css/home.css`、`web/css/room.css`；
+  - 入口和基础：`web/js/home.js`、`web/js/room.js`、`web/js/lib/dom.js`、`web/js/state/store.js`、`web/js/net/socket.js`；
+  - 界面模块：`web/js/ui/nickname.js`、`toast.js`、`status.js`、`players.js`、`lobby.js`、`chat.js`；
+  - 测试：`tests/web/plumbing.test.js`。
+- 提前写好了默认词库 `words/默认.txt`（304 个词，分动物、食物、物品、自然与地点、人物、动作、成语几类），方便手动测试；原计划放在 Task 17。
+- 在 Chrome 里手动验证通过：
+  - 首页建房；输入昵称后进房；重名自动变"小王2"；
+  - 刷新页面后回到原位置，不再问昵称；
+  - 聊天两边互通；房主改设置，另一边实时同步，非房主的控件是禁用的；
+  - 房主掉线 60 秒后房主转给下一个人，掉线的人从等待界面移除；
+  - 踢人后被踢的一方显示"你被房主移出了房间"，再刷新显示"你已被房主移出这个房间"；
+  - 服务器停掉时显示"连接断开了，正在重新连接…"，重启后提示"房间不存在"；
+  - 控制台没有报错。
+- 测到并修掉的问题：等待界面里多出一个"null"字样（replaceChildren 会把 null 当文字）。
+- 测试方法备注：同一浏览器的多个标签页共享 localStorage，会互相顶替身份。测多人时用 `localhost` 和 `127.0.0.1` 两个地址，它们的存储是分开的。
+- 测试：JS 23 个，Python 164 个。
+- 偏离计划：多了 `ui/toast.js`、`ui/status.js`、`css/home.css`；大厅里的玩家列表由 players.js 提供，游戏中的计分条交给模式界面（Task 15），这样核心不需要知道分数。
