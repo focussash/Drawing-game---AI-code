@@ -1,3 +1,23 @@
 __pycache__/
 .pytest_cache/
 *.pyc
+
+# 只对你自己电脑有效的设置
+python-path.txt
+CLAUDE.local.md
+.claude/settings.local.json
+
+# 自己加的词库默认不上传（里面可能有朋友之间的梗）；仓库里只放自带的默认词库。
+# 想公开某个词库：git add -f words/那个词库.txt
+words/*.txt
+!words/默认.txt
+
+# 虚拟环境、编辑器、工具的临时文件
+.venv/
+venv/
+.env
+node_modules/
+.superpowers/
+.vscode/
+.idea/
+*.log

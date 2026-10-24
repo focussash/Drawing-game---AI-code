@@ -47,7 +47,7 @@
 
 ## 5. 约束
 
-- **Python 环境**：只用 `E:\MiniConda\envs\biomotum`（Python 3.13.1），绝不装进系统 Python（见 CLAUDE.md）。
+- **Python 环境**：用项目自己的环境（`environment.yml` 建的 conda 环境 `nhwc`，或者虚拟环境），绝不装进系统 Python。（开发时用的是作者电脑上的 Python 3.13.1 环境。）
 - **两种部署方式都要能跑**：在你的 Windows 电脑上跑，和在 Linux VPS 上跑，必须完全一样。部署方式还没定（见第 9 节）。
 - **所有资源都放在本服务器上**：不加载任何外部 CDN 或字体，字体用系统自带的。
 - **模块化**：每个文件只负责一件事，避免巨型文件（CLAUDE.md 要求）。

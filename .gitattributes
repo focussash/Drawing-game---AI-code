@@ -1,0 +1,2 @@
+# Windows 的 .bat 必须是 CRLF 换行，否则 goto/call 偶尔会跳错行。
+*.bat text eol=crlf

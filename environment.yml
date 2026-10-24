@@ -1,0 +1,15 @@
+# conda 环境。用法：
+#   conda env create -f environment.yml
+#   conda activate nhwc
+#   python main.py
+# 以后依赖有变化：conda env update -f environment.yml --prune
+# 依赖清单只写在 requirements.txt 里，这里直接引用它，两边不会对不上。
+name: nhwc
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.13
+  - pip
+  - pip:
+      - -r requirements.txt

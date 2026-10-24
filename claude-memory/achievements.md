@@ -1,6 +1,6 @@
 # 进度记录（achievements）
 
-分支：`dev`（`main` 上只有文档的初始提交）。测试命令：`"E:/MiniConda/envs/biomotum/python.exe" -m pytest tests -q`，JS：`node --test "tests/web/*.test.js"`。
+分支：`main`（开发时在 `dev`，已合并后删除）。测试命令：`python -m pytest -q`，JS：`node --test "tests/web/*.test.js"`。下文里的 `biomotum` 是作者电脑上的 conda 环境。
 
 ## 子项目 1：骨架与核心容器
 
@@ -206,4 +206,20 @@
 
 ## 合并
 - 2026-10-22：用户授权（"你看着搞吧"），`dev` 快进合并进 `main`（fbe7592）。在 `main` 上测试通过：Python 171 个，JS 45 个。`dev` 分支保留，等用户确认后再删。
-- 公开前扫描过仓库：没有密码、密钥或 token；提交记录里的作者邮箱是 focussash@gmail.com（推到公开仓库时会被看到）。
+- 扫描过仓库：没有密码、密钥或 token。提交记录里带着作者邮箱，推到公开仓库后别人能看到。
+
+## 准备公开到 GitHub（2026-10-23，用户要求）
+- 环境文件：新增 `environment.yml`（conda 环境 `nhwc`，用 conda-forge，Python 3.13，依赖通过 `-r requirements.txt` 引用）。在临时目录里实际建过一次，在里面跑测试，176 个全部通过。另外在 Python 3.12 的虚拟环境里也全部通过，所以 README 写的是"3.12 及以上"。
+- 启动脚本不再写死作者电脑上的路径：
+  - 新增 `scripts/find-python.bat`，按这个顺序找 Python：`python-path.txt` → 名为 nhwc 的 conda 环境 → PATH 里的 python。找不到，或者找到的 Python 里没装依赖时，用中文提示怎么解决。
+  - 作者电脑上的 `python-path.txt` 指向 biomotum，这个文件已加入 .gitignore。
+- 隐私检查：
+  - 提交历史里只有内网示例 IP（10.x、192.168.x），没有公网 IP、隧道网址、密码或密钥。
+  - 作者电脑上的路径和"命令随便跑"的权限设置从 CLAUDE.md 移到了 Claude 的本地记忆里。
+  - `.gitignore` 里加上了：自己加的词库（只保留 `默认.txt`）、`python-path.txt`、`CLAUDE.local.md`、虚拟环境和编辑器的临时文件。
+- 文档分成两部分：
+  - `README.md` 写给玩家和开服的人，用中文：特色、玩法、安装、开服、三种联网方案、配置、词库、常见问题、已知问题、安全和隐私；
+  - `AGENTS.md` 写给开发者和 AI 编程助手，用英文：命令、目录结构、架构、协议、怎么加新模式、约定、测试技巧；
+  - `CLAUDE.md` 只引用 AGENTS.md，再加几条 Claude 专用的说明。
+- 其他新增：`LICENSE`（MIT）；`.gitattributes`（.bat 用 CRLF 换行）。
+- 测试：`tests/server/test_scripts.py` 新增 5 个（启动脚本不写死路径；查找脚本找的环境名和 environment.yml 一致；python-path.txt 不进 git；查找脚本能读 python-path.txt；路径写错时给出提示）。Python 共 176 个，JS 45 个。
