@@ -211,7 +211,3 @@ node --test "tests/web/*.test.js"
 ```
 
 前端测试只需要装 Node（作者用的是 Node 24），不需要 npm 包。
-
-## 许可证
-
-[MIT](LICENSE)

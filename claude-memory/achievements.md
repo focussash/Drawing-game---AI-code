@@ -221,5 +221,5 @@
   - `README.md` 写给玩家和开服的人，用中文：特色、玩法、安装、开服、三种联网方案、配置、词库、常见问题、已知问题、安全和隐私；
   - `AGENTS.md` 写给开发者和 AI 编程助手，用英文：命令、目录结构、架构、协议、怎么加新模式、约定、测试技巧；
   - `CLAUDE.md` 只引用 AGENTS.md，再加几条 Claude 专用的说明。
-- 其他新增：`LICENSE`（MIT）；`.gitattributes`（.bat 用 CRLF 换行）。
+- 其他新增：`.gitattributes`（.bat 用 CRLF 换行）。起初加过 MIT 许可证，用户说不需要，已删掉。
 - 测试：`tests/server/test_scripts.py` 新增 5 个（启动脚本不写死路径；查找脚本找的环境名和 environment.yml 一致；python-path.txt 不进 git；查找脚本能读 python-path.txt；路径写错时给出提示）。Python 共 176 个，JS 45 个。
