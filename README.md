@@ -1,5 +1,7 @@
 # 你画我猜
 
+纯AI代码。小程序啊网页版啊找了好几个用起来都不太舒服，总有设置不太满意，所以让Claude搓了一个。网络安全性估计是一坨，但我不在意(。)
+
 和朋友一起玩的网页版你画我猜。在群里发一个链接，大家用手机浏览器点开就能玩，不用装 App，用电脑浏览器也行。服务器跑在你自己手里，规则和词库都可以自己改。
 
 *A self-hosted, phone-first Pictionary (你画我猜) for a group of friends. Chinese UI; Python backend, vanilla JS frontend. Developer and AI-agent docs: [AGENTS.md](AGENTS.md).*
